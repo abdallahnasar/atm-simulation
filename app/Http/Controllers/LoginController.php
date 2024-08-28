@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Services\LoginService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+    protected $loginService;
+
+    public function __construct(LoginService $loginService)
+    {
+        $this->loginService = $loginService;
+    }
     public function login(Request $request)
     {
         $request->validate([
@@ -16,11 +20,9 @@ class LoginController extends Controller
             'pin' => 'required|string|size:4',
         ]);
 
-        $user = User::where('debit_card_number', $request->debit_card_number)->first();
+        $token = $this->loginService->login($request->debit_card_number, $request->pin);
 
-        if ($user && Hash::check($request->pin, $user->pin)) {
-            Auth::login($user);
-            $token = $user->createToken('auth_token')->accessToken;
+        if ($token) {
             return response()->json(['token' => $token], 200);
         }
 
