@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Services\LoginService;
-use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class LoginController extends BaseController
 {
     protected $loginService;
 
@@ -13,19 +13,15 @@ class LoginController extends Controller
     {
         $this->loginService = $loginService;
     }
-    public function login(Request $request)
-    {
-        $request->validate([
-            'debit_card_number' => 'required|string|size:16',
-            'pin' => 'required|string|size:4',
-        ]);
 
+    public function login(LoginRequest $request)
+    {
         $token = $this->loginService->login($request->debit_card_number, $request->pin);
 
         if ($token) {
-            return response()->json(['token' => $token], 200);
+            return $this->sendResponse(['token' => $token], 'User logged in successfully');
         }
 
-        return response()->json(['message' => 'Invalid credentials'], 401);
+        return $this->sendError('Invalid credentials', 401);
     }
 }
