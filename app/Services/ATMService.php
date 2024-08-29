@@ -8,18 +8,23 @@ use Illuminate\Support\Facades\DB;
 
 class ATMService
 {
+    protected $transaction;
+
+    public function __construct(Transaction $transaction)
+    {
+        $this->transaction = $transaction;
+    }
+
     public function deposit(User $user, $amount): array
     {
         DB::transaction(function () use ($user, $amount) {
             $user->balance += $amount;
             $user->save();
 
-            // Create a deposit transaction
-            Transaction::create([
+            $this->transaction->create([
                 'user_id' => $user->id,
                 'type' => 'deposit',
                 'amount' => $amount,
-                'balance_after' => $user->balance,
             ]);
         });
 
@@ -27,13 +32,13 @@ class ATMService
 
     }
 
-    public function withdraw(User $user, $amount)
+    public function withdraw(User $user, $amount): array
     {
         DB::transaction(function () use ($user, $amount) {
             $user->balance -= $amount;
             $user->save();
 
-            Transaction::create([
+            $this->transaction->create([
                 'user_id' => $user->id,
                 'type' => 'withdrawal',
                 'amount' => $amount,
