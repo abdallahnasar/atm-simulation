@@ -15,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
     {
 
         $this->app->bind(LoginService::class, function ($app) {
-            return new LoginService($app->make(User::class));
+            return new LoginService(
+                $app->make(User::class),
+                $app->make('hash')
+            );
         });
 
     }
