@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\BalanceSufficient;
 
 class WithdrawRequest extends BaseRequest
 {
@@ -22,7 +22,7 @@ class WithdrawRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'amount' => 'required|numeric|min:0.01',
+            'amount' => ['required','numeric','min:0.01', new BalanceSufficient]
         ];
     }
 }
