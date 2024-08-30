@@ -24,7 +24,7 @@
                     @foreach($transactions as $transaction)
                         <tr>
                             <td>{{ $transaction->id }}</td>
-                            <td>{{ $transaction->user->name }}</td>
+                            <td><a href="{{ route('admin.users.show', $transaction->user->id) }}">{{ $transaction->user->name }}</a></td>
                             <td>{{ $transaction->amount }}</td>
                             <td>{{ $transaction->type }}</td>
                             <td>{{ $transaction->created_at }}</td>

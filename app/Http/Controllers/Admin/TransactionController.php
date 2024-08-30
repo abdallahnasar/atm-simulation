@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Transaction;
 use App\Repositories\TransactionRepository;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
@@ -15,9 +16,9 @@ class TransactionController extends Controller
         $this->transactionRepository = $transactionRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $transactions = $this->transactionRepository->all();
+        $transactions = $this->transactionRepository->all($request->all());
         return view('admin.transactions.index', compact('transactions'));
     }
 

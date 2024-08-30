@@ -13,9 +13,18 @@ class TransactionRepository
         $this->model = $transaction;
     }
 
-    public function all()
+    public function all($search = [])
     {
-        return $this->model->with('user')->orderBy('created_at', 'desc')->paginate(10);
+        $query = $this->model->newQuery();
+        if (count($search)) {
+            foreach($search as $key => $value) {
+                if (in_array($key, ['user_id', 'amount', 'type', 'status'])) {
+                    $query->where($key, $value);
+                }
+            }
+        }
+
+        return $query->with('user')->orderBy('created_at', 'desc')->paginate(10);
     }
 
     public function find($id)
