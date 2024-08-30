@@ -14,7 +14,7 @@ class UserRepository
     }
     public function all($columns = ['*'])
     {
-        return $this->model->select($columns)->orderBy('created_at', 'desc')->get();
+        return $this->model->select($columns)->orderBy('id', 'desc')->get();
     }
     public function allPaginated()
     {

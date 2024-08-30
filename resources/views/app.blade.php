@@ -8,9 +8,9 @@
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -25,6 +25,16 @@
         </ul>
 
         <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-link nav-link" style="color: #343a40;">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </form>
+            </li>
+        </ul>
     </nav>
     <!-- /.navbar -->
 
@@ -32,15 +42,14 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="#" class="brand-link">
-            <span class="brand-text font-weight-light"> ATM Simulation</span>
+            <span class="brand-text font-weight-light">ATM Simulation</span>
         </a>
 
         <!-- Sidebar -->
         <div class="sidebar">
             <!-- Sidebar user (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                </div>
+                <div class="image"></div>
                 <div class="info">
                     <a href="#" class="d-block">Admin Panel</a>
                 </div>
@@ -49,24 +58,16 @@
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-                         with font-awesome or any other icon font library -->
-
-                    <li class="nav-header"></li>
                     <li class="nav-item">
-                        <a href="{{route('admin.users.index')}}" class="nav-link">
-                            <i class="nav-icon far fa-users"></i>
-                            <p>
-                                Users
-                            </p>
+                        <a href="{{ route('admin.users.index') }}" class="nav-link">
+                            <i class="nav-icon far fa-user"></i>
+                            <p>Users</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('admin.transactions.index')}}" class="nav-link">
-                            <i class="nav-icon far fa"></i>
-                            <p>
-                                Transactions
-                            </p>
+                        <a href="{{ route('admin.transactions.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-exchange-alt"></i>
+                            <p>Transactions</p>
                         </a>
                     </li>
                 </ul>
@@ -86,8 +87,7 @@
                         <h1></h1>
                     </div>
                     <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                        </ol>
+                        <ol class="breadcrumb float-sm-right"></ol>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -115,13 +115,13 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
-<script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
-<script src="{{asset('dist/js/adminlte.min.js')}}"></script>
+<script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 {{--<!-- AdminLTE for demo purposes -->--}}
-<script src="{{asset('dist/js/demo.js')}}"></script>
+<script src="{{ asset('dist/js/demo.js') }}"></script>
 @stack('scripts')
 
 </body>
