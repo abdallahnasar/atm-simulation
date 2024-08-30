@@ -38,7 +38,7 @@ class LoginControllerTest extends TestCase
 
         $this->withHeader('Authorization', 'Bearer '.$token);
 
-        $response = $this->postJson('/api/login', [
+        $response = $this->postJson('/api/v1/login', [
             'debit_card_number' => '1234567812345678',
             'pin' => '1234'
         ]);
@@ -71,7 +71,7 @@ class LoginControllerTest extends TestCase
 
         $this->withHeader('Authorization', 'Bearer '.$token);
 
-        $response = $this->postJson('/api/login', [
+        $response = $this->postJson('/api/v1/login', [
             'debit_card_number' => '1234567812345678',
             'pin' => 'wrong-pin'
         ]);
@@ -90,7 +90,7 @@ class LoginControllerTest extends TestCase
             'pin' => '1234',
         ];
 
-        $response = $this->postJson('/api/login', $data);
+        $response = $this->postJson('/api/v1/login', $data);
 
         $response->assertStatus(401)
             ->assertJson([

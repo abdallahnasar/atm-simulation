@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Transaction;
+use App\Models\User;
 
 class TransactionRepository
 {
@@ -31,4 +32,20 @@ class TransactionRepository
     {
         return $this->model->find($id);
     }
+
+    public function getTransactionsOfUser(User $user)
+    {
+        return $user->transactions()->orderBy('created_at', 'desc')->paginate(10);
+    }
+
+    public function createTransaction($userId, $type, $amount)
+    {
+        return $this->model->create([
+            'user_id' => $userId,
+            'type' => $type,
+            'amount' => $amount,
+        ]);
+    }
+
+
 }

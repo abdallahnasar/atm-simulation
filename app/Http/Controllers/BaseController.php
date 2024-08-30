@@ -6,9 +6,32 @@ use Illuminate\Support\Facades\Response;
 
 class BaseController extends Controller
 {
-    public function sendResponse($result, $message, $code = 200): JsonResponse
+    public function sendResponse($result, $message, $code = 200, $paginatedResponse = false): JsonResponse
     {
-        return Response::json($this->makeResponse($message, $result), $code);
+        if ($paginatedResponse) {
+            $response = $this->makePaginatedResponse($message, $result);
+        } else {
+            $response = $this->makeResponse($message, $result);
+        }
+
+        return Response::json($response, $code);
+    }
+
+    public function makePaginatedResponse($message, $paginator): array
+    {
+        return [
+            'success' => true,
+            'data' => $paginator->items(),
+            'pagination' => [
+                'total' => $paginator->total(),
+                'per_page' => $paginator->perPage(),
+                'current_page' => $paginator->currentPage(),
+                'last_page' => $paginator->lastPage(),
+                'next_page_url' => $paginator->nextPageUrl(),
+                'prev_page_url' => $paginator->previousPageUrl(),
+            ],
+            'message' => $message,
+        ];
     }
 
     public function sendError($error, $code = 404): JsonResponse

@@ -13,7 +13,7 @@
                         <select name="user_id" id="user_id" class="form-control">
                             <option value="">All Users</option>
                             @foreach ($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                <option value="{{ $user->id }}" {{ (request()->get('user_id') == $user->id) ? 'selected' : '' }}>{{ $user->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -60,7 +60,7 @@
                 </table>
             </div>
             <div class="card-footer clearfix">
-                {{ $transactions->links('pagination::bootstrap-4') }}
+                {{ $transactions->appends(request()->query())->links('pagination::bootstrap-4') }}
             </div>
         </div>
         </section>
