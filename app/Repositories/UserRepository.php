@@ -12,7 +12,11 @@ class UserRepository
     {
         $this->model = $user;
     }
-    public function all()
+    public function all($columns = ['*'])
+    {
+        return $this->model->select($columns)->orderBy('created_at', 'desc')->get();
+    }
+    public function allPaginated()
     {
         return $this->model->orderBy('created_at', 'desc')->paginate(10);
     }

@@ -18,7 +18,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = $this->userRepository->all();
+        $users = $this->userRepository->allPaginated();
         return view('admin.users.index', compact('users'));
     }
 

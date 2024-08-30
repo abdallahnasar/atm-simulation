@@ -17,7 +17,7 @@
                 <table class="table table-striped projects">
                     <thead>
                     <tr>
-                        <th style="width: 1%">#</th>
+                        <th style="width: 2%">ID</th>
                         <th style="width: 20%">Name</th>
                         <th style="width: 20%">Debit Card Number</th>
                         <th style="width: 20%">Balance</th>

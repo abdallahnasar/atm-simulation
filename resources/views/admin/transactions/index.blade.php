@@ -4,7 +4,26 @@
 
     <section class="content">
 
-        <!-- Default box -->
+        <!-- todo: to be changed to select2 -->
+        <form action="{{ route('admin.transactions.index') }}" method="GET" class="mb-3" style="margin-top: -32px">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="user_id"></label>
+                        <select name="user_id" id="user_id" class="form-control">
+                            <option value="">All Users</option>
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-0" style="margin-top: 24px">
+                    <button type="submit" class="btn btn-primary float-right">Filter</button>
+                </div>
+            </div>
+        </form>
+
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Transactions</h3>
@@ -21,7 +40,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($transactions as $transaction)
+                    @forelse($transactions as $transaction)
                         <tr>
                             <td>{{ $transaction->id }}</td>
                             <td><a href="{{ route('admin.users.show', $transaction->user->id) }}">{{ $transaction->user->name }}</a></td>
@@ -32,17 +51,18 @@
                                 <a href="{{ route('admin.transactions.show', $transaction->id) }}" class="btn btn-info">View</a>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="6">No transactions found.</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
             </div>
-            <!-- /.card-body -->
             <div class="card-footer clearfix">
                 {{ $transactions->links('pagination::bootstrap-4') }}
             </div>
         </div>
-        <!-- /.card -->
-
-    </section>
+        </section>
 
 @endsection

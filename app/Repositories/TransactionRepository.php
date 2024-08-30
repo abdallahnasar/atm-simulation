@@ -13,12 +13,12 @@ class TransactionRepository
         $this->model = $transaction;
     }
 
-    public function all($search = [])
+    public function allPaginated($search = [])
     {
         $query = $this->model->newQuery();
         if (count($search)) {
             foreach($search as $key => $value) {
-                if (in_array($key, ['user_id', 'amount', 'type', 'status'])) {
+                if (in_array($key, ['user_id', 'amount', 'type', 'status']) && $value) {
                     $query->where($key, $value);
                 }
             }
