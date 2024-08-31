@@ -8,7 +8,7 @@ Route::prefix('v1')->group(function (){
 
     Route::post('login', [LoginController::class, 'login']);
 
-    Route::middleware('auth:api', 'throttle:10,1')->group(function (){
+    Route::middleware('auth:api', 'throttle:'. env('API_RATE_LIMIT', 10) .',1')->group(function (){
         Route::post('deposit', [ATMController::class, 'deposit']);
         Route::post('withdraw', [ATMController::class, 'withdraw']);
         Route::get('balance', [ATMController::class, 'balance']);

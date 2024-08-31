@@ -34,7 +34,7 @@
                             <td>{{ $user->debit_card_number }}</td>
                             <td>{{ $user->balance }}</td>
                             <td>{{ $user->created_at }}</td>
-                            <td><a href="{{ route('admin.transactions.index', ['user_id' => $user->id]) }}">Transactions</a></td>
+                            <td><a href="{{ route('admin.transactions.index', ['user_id' => $user->id]) }}">{{ $user->transactions()->exists() ? 'Transactions':'' }}</a></td>
                             <td class="project-actions text-right">
                                 <a class="btn btn-primary btn-sm" href="{{ route('admin.users.show', $user->id) }}">
                                     <i class="fas fa-folder"></i> View

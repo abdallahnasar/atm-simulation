@@ -18,6 +18,7 @@ Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
 
+    Route::redirect('/', 'admin/users');
     Route::resource('users', UserController::class);
     Route::get('transactions', [TransactionController::class, 'index'])->name('transactions.index');
     Route::get('transactions/{transaction}', [TransactionController::class, 'show'])->name('transactions.show');
