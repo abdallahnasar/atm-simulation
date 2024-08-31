@@ -124,11 +124,10 @@ note that a separate database is used for running automated tests to ensure data
 
 #### Token Expiration:
 JWT tokens are configured to expire after 15 minutes to enhance security. You can adjust the expiration time in the `.env` file settings: TOKEN_EXPIRATION_TIME in minutes.
-JWT tokens are configured to expire after 15 minutes to enhance security. You can adjust the expiration time in the `.env` file settings: TOKEN_EXPIRATION_TIME in minutes.
 
 #### Rate Limiting:
 To protect against abuse, API requests are throttled. Each user is allowed a maximum of 10 requests per minute. This helps ensure fair usage and prevents server overload.
-you can adjust the rate limit in the `.env` file settings: TOKEN_EXPIRATION_TIME
+you can adjust the rate limit in the `.env` file settings: API_RATE_LIMIT
 
 #### Admin Interface:
 The admin interface is accessible at http://localhost/admin. It provides a simple dashboard for managing user accounts and viewing transaction history:
