@@ -19,43 +19,42 @@ This project is an ATM simulation backend developed using Laravel. It provides A
 
 Before you begin, ensure you have the following installed:
 
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
-- [Composer](https://getcomposer.org/)
-- [Git](https://git-scm.com/)
+- [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/), [Composer](https://getcomposer.org/), [Git](https://git-scm.com/)
 
 
 ## Project Setup
-### 1. Clone the Repository
+#### 1. Clone the Repository
+```bash
 git clone https://github.com/abdallahnasar/atm-simulation.git
+```
 
 cd atm-simulation
 
-### 2. Install Dependencies
+#### 2. Install Dependencies
 ```bash
 composer install
 ```
-### 3. Copy Environment File
+#### 3. Copy Environment File
 ```bash
 cp .env.example .env
 ```
-### 4. Generate Application Key
+#### 4. Generate Application Key
 ```bash
 php artisan key:generate
 ```
-### 5. Start Docker Containers
+#### 5. Start Docker Containers
 ```bash
 ./vendor/bin/sail up -d
 ```
-### 6. Run Database Migrations and Seeders
+#### 6. Run Database Migrations and Seeders
 ```bash
 ./vendor/bin/sail artisan migrate --seed
 ```
-### 7. Install Passport
+#### 7. Install Passport
 ```bash
 ./vendor/bin/sail artisan passport:install
 ```
-### 8. Run Tests
+#### 8. Run Tests
 ```bash
 cp .env.testing.example .env.testing
 ./vendor/bin/sail artisan migrate --env=testing
