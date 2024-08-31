@@ -14,6 +14,12 @@ class LoginController extends BaseController
         $this->loginService = $loginService;
     }
 
+    /**
+     * Login user
+     * @unauthenticated
+     * @param LoginRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(LoginRequest $request)
     {
         $token = $this->loginService->login($request->debit_card_number, $request->pin);
