@@ -26,9 +26,8 @@ Before you begin, ensure you have the following installed:
 #### 1. Clone the Repository
 ```bash
 git clone https://github.com/abdallahnasar/atm-simulation.git
-```
-
 cd atm-simulation
+```
 
 #### 2. Install Dependencies
 ```bash
