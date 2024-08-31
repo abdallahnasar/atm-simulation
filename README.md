@@ -145,3 +145,13 @@ You can access the database using the following command:
 default database 'laravel', and testing database 'testing'
 
 
+### Design and Architecture Considerations
+
+##### Separation of Concerns & SOLID Principles:
+
+- Moved validation logic to dedicated Request Validation classes. Custom validation rules, such as BalanceSufficient, ensure data integrity and consistency.
+- Added a Base Controller class to standardize JSON responses with appropriate status codes, ensuring consistency across the application.
+- Implemented the Repository pattern for database interactions, keeping business logic separate from controllers. Controllers delegate tasks to services, which in turn interact with repositories.
+- Used Dependency Injection along with the Service Repository pattern, enhancing testability, reusability, and isolation of business logic.
+- Added Factories and Seeders to facilitate the testing of various data scenarios.
+
